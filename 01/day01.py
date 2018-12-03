@@ -19,5 +19,3 @@ v = [eval(x) for x in fetch(1).split()]
 
 print('part_1: {}'.format(solve_p1(v)))
 print('part_2: {}'.format(solve_p2(v)))
-
-

@@ -26,7 +26,3 @@ v = fetch(2).split()
 
 print('part_1: {}'.format(p1(v)))
 print('part_2: {}'.format(p2(v)))
-
-
-
-
