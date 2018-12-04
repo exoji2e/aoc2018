@@ -3,22 +3,23 @@ sys.path.extend(['..', '.'])
 from fetch import fetch
 from collections import *
 
-def get_td(l):
-    y, m, d = map(int, l.split()[0][1:].split('-'))
-    hh, mm = map(int, l.split()[1][:-1].split(':'))
+def get_td(x):
+    y, m, d = map(int, x[0][1:].split('-'))
+    hh, mm = map(int, x[1][:-1].split(':'))
     return y, m, d, hh, mm
 
 def sleep_counter(v):
     events = v.strip().split('\n')
-    events.sort(key=lambda x: get_td(x))
+    events.sort(key=lambda x: get_td(x.split()))
     guard_id = None
     t0 = None
     d = defaultdict(Counter)
     for l in events:
-        t = get_td(l)[-1]
-        c = l.split()[2]
+        x = l.split()
+        t = get_td(x)[-1]
+        c = x[2]
         if c == 'Guard':
-            guard_id = int(l.split()[3][1:])
+            guard_id = int(x[3][1:])
             assert t0 == None
         elif c == 'falls':
             assert t0 == None
@@ -32,14 +33,14 @@ def sleep_counter(v):
 
 def p1(v):
     d = sleep_counter(v)
-    g_id, dc = max(d.items(), key=lambda x: sum(x[1].values()))
-    when, _ = max(dc.items(), key=lambda x: x[1])
+    g_id, g_ctr = max(d.items(), key=lambda x: sum(x[1].values()))
+    when, _ = max(g_ctr.items(), key=lambda x: x[1])
     return when*g_id
 
 def p2(v):
     d = sleep_counter(v)
-    g_id, dc = max(d.items(), key=lambda x: max(x[1].values()))
-    when, _ = max(dc.items(), key=lambda x: x[1])
+    g_id, g_ctr = max(d.items(), key=lambda x: max(x[1].values()))
+    when, _ = max(g_ctr.items(), key=lambda x: x[1])
     return when*g_id
 
 L = """[1518-11-01 00:00] Guard #10 begins shift
