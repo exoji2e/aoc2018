@@ -22,7 +22,7 @@ def p2(ws):
             if len(common) == len(w1) - 1:
                 return common
 
-v = fetch(2).split()
-
-print('part_1: {}'.format(p1(v)))
-print('part_2: {}'.format(p2(v)))
+if __name__ == '__main__':
+    v = fetch(2).split()
+    print('part_1: {}'.format(p1(v)))
+    print('part_2: {}'.format(p2(v)))
