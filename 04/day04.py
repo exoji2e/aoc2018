@@ -18,7 +18,7 @@ def sleep_counter(v):
         t = get_td(l)[-1]
         c = l.split()[2]
         if c == 'Guard':
-            guard_id = int(x[3][1:])
+            guard_id = int(l.split()[3][1:])
             assert t0 == None
         elif c == 'falls':
             assert t0 == None
