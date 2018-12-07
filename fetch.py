@@ -1,7 +1,4 @@
-import requests, os
-
-from secret import session
-
+import os
 def log(s):
     print('Fetch: {}'.format(s))
 
@@ -12,6 +9,8 @@ def fetch(day, year=2018):
         os.mkdir('cache')
     exists = os.path.isfile(filename)
     if not exists:
+        import requests
+        from secret import session
         jar = requests.cookies.RequestsCookieJar()
         jar.set('session', session)
         url = 'https://adventofcode.com/{}/day/{}/input'.format(year, day)
