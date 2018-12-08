@@ -3,35 +3,38 @@ sys.path.extend(['..', '.'])
 from fetch import fetch
 
 def p1(v):
-    d = list(map(int, v.split()))
-    def solve(D, i):
-        ch, md = D[i:i+2]
-        S, i = 0, i+2
+    d = map(int, v.split())
+    
+    def solve(D):
+        ch, md, S = next(D), next(D), 0
         for _ in range(ch):
-            v, i = solve(D, i)
-            S += v
-        S += sum(D[i:i+md])
-        return S, i+md
-    return solve(d, 0)[0]
+            S += solve(D)
+        for _ in range(md):
+            S += next(D)
+        return S
+
+    return solve(d)
 
 
 def p2(v):
-    d = list(map(int, v.split()))
-    def solve(D, i):
-        ch, md = D[i:i+2]
-        S, i = 0, i+2
-        x = []
+    d = map(int, v.split())
+
+    def solve(D):
+        ch, md, S = next(D), next(D), 0
+        scores = []
         for _ in range(ch):
-            v, i = solve(D, i)
-            x.append(v)
-        if ch == 0:
-            S = sum(D[i:i+md])
-        else:
-            for v in D[i:i+md]:
-                if 0 <= v - 1 < ch:
-                    S += x[v-1]
-        return S, i+md
-    return solve(d, 0)[0]
+            v = solve(D)
+            scores.append(v)
+        for _ in range(md):
+            v = next(D)
+            if ch == 0:
+                S += v
+            else:
+                if 0 < v <= ch:
+                    S += scores[v-1]
+        return S
+
+    return solve(d)
 
 
 if __name__ == '__main__':
