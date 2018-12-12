@@ -3,7 +3,7 @@ sys.path.extend(['..', '.'])
 from fetch import fetch
 
 def p1(v):
-    d = map(int, v.split())
+    d = (int(c) for c in v.split())
     
     def solve(D):
         ch, md, S = next(D), next(D), 0
@@ -17,7 +17,7 @@ def p1(v):
 
 
 def p2(v):
-    d = map(int, v.split())
+    d = (int(c) for c in v.split())
 
     def solve(D):
         ch, md, S = next(D), next(D), 0
