@@ -26,5 +26,5 @@ def fetch(day, year=2018):
             return r.text
         with open(filename,'w') as f:
             f.write(r.text.strip())
-    return open(filename, 'r').read().strip()
+    return open(filename, 'r').read().strip('\n')
 
