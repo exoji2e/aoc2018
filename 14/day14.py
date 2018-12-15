@@ -41,8 +41,8 @@ if __name__ == '__main__':
     assert p1('5') == '0124515891'
     assert p1('18') == '9251071085'
     assert p1('2018') == '5941429882'
-
     print('part_1: {}'.format(p1(v)))
+
     assert p2('51589') == 9
     assert p2('01245') == 5
     assert p2('92510') == 18

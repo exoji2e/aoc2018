@@ -1,6 +1,6 @@
 import sys
 sys.path.extend(['..', '.'])
-from fetch import fetch
+from fetch import fetch, get_samples
 from collections import *
 
 def get_pos(b):
@@ -148,57 +148,20 @@ def p2(v, log=False):
 
 if __name__ == '__main__':
     v = fetch(15)
-    
-    T_1 = """#######
-#.G...#
-#...EG#
-#.#.#G#
-#..G#E#
-#.....#
-#######"""
-    T_2 = """#######
-#G..#E#
-#E#E.E#
-#G.##.#
-#...#E#
-#...E.#
-#######"""
-    T_3 = """#######
-#E..EG#
-#.#G.E#
-#E.##E#
-#G..#.#
-#..E#.#
-#######"""
-    T_4 = """#######
-#E.G#.#
-#.#G..#
-#G.#.G#
-#G..#.#
-#...E.#
-#######"""
-    T_5 = """#######
-#.E...#
-#.#..G#
-#.###.#
-#E#G#G#
-#...#G#
-#######"""
-    T_6 = """#########
-#G......#
-#.E.#...#
-#..##..G#
-#...##..#
-#...#...#
-#.G...G.#
-#.....G.#
-#########"""
-    assert p1(T_1) == 27730
-    assert p1(T_2) == 36334
-    assert p1(T_3) == 39514
-    assert p1(T_4) == 27755
-    assert p1(T_5) == 28944
-    assert p1(T_6) == 18740
+    ans = {
+        '1': 27730, 
+        '2': 36334,
+        '3': 39514,
+        '4': 27755,
+        '5': 28944,
+        '6': 18740 }
+
+    for fname, data in get_samples(15):
+        sid = fname.split('/')[-1].replace('.in', '')
+        my_ans = p1(data)
+        if my_ans != ans[sid]:
+            print(my_ans, ans[sid])
+            print(data)
 
     print('part_1: {}'.format(p1(v)))
     print('part_2: {}'.format(p2(v)))

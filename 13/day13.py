@@ -1,6 +1,6 @@
 import sys
 sys.path.extend(['..', '.'])
-from fetch import fetch
+from fetch import fetch, get_samples
 from collections import *
 
 def get_next(x, y, i, dx, dy, b, turns):
@@ -84,21 +84,17 @@ def p2(v):
 
 if __name__ == '__main__':
     v = fetch(13)
-    T_1="""/->-\\        
-|   |  /----\\
-| /-+--+-\\  |
-| | |  | v  |
-\\-+-/  \\-+--/
-  \\------/   """
-    assert p1(T_1) == '7,3'
-    T_2="""/>-<\\  
-|   |  
-| /<+-\\
-| | | v
-\\>+</ |
-  |   ^
-  \\<->/"""
-    assert p2(T_2) == '6,4'
+    ans_1 = {'1': '7,3'}
+    ans_2 = {'2': '6,4'}
+    samples = get_samples(13)
+    for fname, data in samples:
+        sid = fname.split('/')[-1].replace('.in', '')
+        if sid in ans_1:
+            my_ans1 = p1(data)
+            assert my_ans1 == ans_1[sid]
+        if sid in ans_2:
+            my_ans2 = p2(data)
+            assert my_ans2 == ans_2[sid]
 
     print('part_1: {}'.format(p1(v)))
     print('part_2: {}'.format(p2(v)))
