@@ -19,21 +19,20 @@ def dl(fname, day, year):
     if r.status_code != 200:
         log('Not 200 as status code')
         return r.text
-    with open(filename,'w') as f:
+    with open(fname,'w') as f:
         f.write(r.text)
 
 def mkdirs(f):
     try:
         os.makedirs(f)
     except: pass
-        
 
 
-def fetch(day, year=2018):
+def fetch(day, year=2018, force=False):
     filename = 'cache/{}.in'.format(str(day))
     mkdirs('cache')
     exists = os.path.isfile(filename)
-    if not exists:
+    if not exists or force:
         dl(filename, day, year)
     return open(filename, 'r').read().strip('\n')
 
@@ -42,7 +41,7 @@ def get_samples(day, year=2018):
     d = 'samples/{}_{}'.format(year,day)
     mkdirs(d)
     samples = []
-    for fname in glob.glob('{}/*.in'):
+    for fname in glob.glob('{}/*.in'.format(d)):
         inp = open(fname, 'r').read().strip('\n')
         samples.append((fname, inp))
     return samples
